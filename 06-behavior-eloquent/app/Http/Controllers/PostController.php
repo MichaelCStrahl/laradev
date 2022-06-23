@@ -87,7 +87,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -98,7 +98,67 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $postRequest = [
+        //     'title' => $request->title
+        // ];
+        // var_dump($postRequest, $request);
+
+        /**
+         * Object -> Prop -> Save
+         *
+         * OBS: Necessário adicionar o namespace para utilizar a classe Post
+         * use App/Post
+         */
+
+        /** 1° */
+        // $post = new Post;
+        // $post->title = $request->title;
+        // $post->subtitle = $request->subtitle;
+        // $post->description = $request->description;
+        // $post->save();
+
+        /** 2° */
+        // Post::create([
+        //     'title' => $request->title,
+        //     'subtitle' => $request->subtitle,
+        //     'description' => $request->description
+        // ]);
+
+        /**
+         * 3°
+         * firstOrNew([Condição], [Outros Campos])
+         *
+         * Funcionamento: Retorna o primeiro registro da condição
+         * se não encontrar um registro pode salvar na base desde que
+         * seja fornecido todos os outros parâmetros. Não cria o registro
+         * automaticamente =>> $post->save();
+         */
+        // $post = Post::firstOrNew([
+        //     'title' => 'teste3'
+        // ], [
+        //     'subtitle' => 'teste2',
+        //     'description' => 'teste2'
+        // ]);
+        // $post->save();
+
+
+        /**
+         * 4°
+         * firstOrNew([Condição], [Outros Campos])
+         *
+         * Funcionamento: Retorna o primeiro registro da condição
+         * se não encontrar um registro pode salvar na base desde que
+         * seja fornecido todos os outros parâmetros. Não cria o registro
+         * automaticamente =>> $post->save();
+         */
+        $post = Post::firstOrCreate([
+            'title' => 'teste4'
+        ], [
+            'subtitle' => 'teste4',
+            'description' => 'teste4'
+        ]);
+
+        var_dump($post);
     }
 
     /**
