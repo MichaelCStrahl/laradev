@@ -13,7 +13,7 @@
 
 <div class="container my-5">
     <a href="{{ route('posts.create') }}" class="btn btn-success mb-5">Cadastrar novo artigo</a>
-    <a href="{{ route('posts.trashed') }}" class="btn btn-warning mb-5">Ver lixeira</a>
+    <a href="{{ route('posts.index') }}" class="btn btn-success mb-5">Ver Todos</a>
     <?php
     if(!empty($posts)):
     ?>
@@ -26,10 +26,10 @@
             <h2>{{ $post->subtitle }}</h2>
             <p>{{ $post->description }}</p>
             <small>Criado em: {{ date('d/h/Y H:i', strtotime($post->create_at)) }} - Editado em: {{ date('d/h/Y H:i', strtotime($post->updated_at)) }}</small>
-            <form class="mt-3" action="{{ route('posts.destroy', ['id' => $post->id]) }}" method="post">
+            <form class="mt-3" action="{{ route('posts.forceDelete', ['id' => $post->id]) }}" method="post">
                 @csrf
                 @method('DELETE')
-                <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="btn btn-primary mr-1">Editar</a>
+                <a href="{{ route('posts.restore', ['id' => $post->id]) }}" class="btn btn-primary mr-1">Restaurar</a>
                 <button type="submit" class="btn btn-danger">Excluir</button>
             </form>
         </article>

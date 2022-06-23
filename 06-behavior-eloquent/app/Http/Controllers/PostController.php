@@ -7,6 +7,31 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function forceDelete($post)
+    {
+        $post = Post::onlyTrashed()->where(['id' => $post])->forceDelete();
+        return redirect()->route('posts.trashed');
+    }
+
+    public function restore($post)
+    {
+        $post = Post::onlyTrashed()->where(['id' => $post])->first();
+        // var_dump($posts);
+
+        if($post->trashed()):
+            $post->restore();
+        endif;
+
+        return redirect()->route('posts.trashed');
+    }
+
+    public function trashed()
+    {
+        $posts = Post::onlyTrashed()->get();
+        return view('posts.trashed', ['posts' => $posts]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -69,6 +94,9 @@ class PostController extends Controller
 
         /**
          * Retorna todos registros
+         * OBS: desconsidera registros já deletados :: softDeletes
+         * para visualizar os registros tamém deletados utiliza-se
+         * o método :: Post::withTrashed()->get()
          */
         $posts = Post::all();
         return view('posts.index', ['posts' => $posts]);
