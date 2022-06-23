@@ -111,11 +111,11 @@ class PostController extends Controller
          */
 
         /** 1° */
-        // $post = new Post;
-        // $post->title = $request->title;
-        // $post->subtitle = $request->subtitle;
-        // $post->description = $request->description;
-        // $post->save();
+        $post = new Post;
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->description = $request->description;
+        $post->save();
 
         /** 2° */
         // Post::create([
@@ -151,14 +151,16 @@ class PostController extends Controller
          * seja fornecido todos os outros parâmetros. Não cria o registro
          * automaticamente =>> $post->save();
          */
-        $post = Post::firstOrCreate([
-            'title' => 'teste4'
-        ], [
-            'subtitle' => 'teste4',
-            'description' => 'teste4'
-        ]);
+        // $post = Post::firstOrCreate([
+        //     'title' => 'teste4'
+        // ], [
+        //     'subtitle' => 'teste4',
+        //     'description' => 'teste4'
+        // ]);
 
-        var_dump($post);
+        // var_dump($post);
+
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -180,7 +182,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -192,7 +194,37 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        /**
+         * 1°
+         *
+         * Não instancia um novo objeto Post ou utiliza o find para
+         * editar o mesmo registro
+         */
+        $post = Post::find($post->id);
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->description = $request->description;
+        $post->save();
+
+        /**
+         * 2°
+         * updateOrCreate([Condição], [Outros Campos])
+         *
+         * Funcionamento: atualiza o registro com a condição procurada
+         * se não existir é criado o registro
+         */
+        // $post = Post::updateOrCreate([
+        //     'title' => 'teste5'
+        // ], [
+        //     'subtitle' => 'teste6',
+        //     'description' => 'teste6'
+        // ]);
+
+        // Post::where('created_at', '<=', date('2021-m-d H:i:s'))->update(['description' => 'teste2']);
+
+        // var_dump($posts);
+
+        return redirect()->route('posts.index');
     }
 
     /**
