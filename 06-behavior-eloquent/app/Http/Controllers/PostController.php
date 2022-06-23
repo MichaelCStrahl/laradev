@@ -235,6 +235,28 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        /**
+         * 1°
+         */
+        // Post::find($post->id)->delete();
+
+
+        /**
+         * 2°
+         * passa o id de todos elementos que se deseja excluir
+         */
+        // Post::destroy([2, 3]);
+
+        /**
+         * 3°
+         * utilizando o where
+         */
+        // Post::where('created_at', '<=', date('2021-m-d H:i:s'))->delete();
+
+        /**
+         * 4°
+         */
+        Post::destroy($post->id);
+        return redirect()->route('posts.index');
     }
 }
