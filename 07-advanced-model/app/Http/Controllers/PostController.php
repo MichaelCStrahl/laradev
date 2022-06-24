@@ -50,10 +50,13 @@ class PostController extends Controller
 
         echo "<p>#$post->id Título: $post->title</p>";
         echo "<p>Subtítulo: $post->subtitle</p>";
-        echo "<p>Descrição: $post->description</p><hr>";
+        echo "<p>Descrição: $post->description</p>";
+        echo "<p>Data de criação: $post->createdFtm</p><hr>";
+
+        // $post->title = 'Título de teste do meu artigo!';
+        // $post->save();
 
         $postAuthor = $post->author()->get()->first();
-
         if($postAuthor):
             echo "<br><h1>Dados do Usuário</h1>";
             echo "<p>Nome do usuário: $postAuthor->name </p>";
