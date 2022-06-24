@@ -137,6 +137,19 @@ class UserController extends Controller
         // $users = User::with('addressDelivery')->get();
 
         // dd($users);
+
+
+        $posts = $user->posts()->orderBy('id', 'DESC')->get();
+
+        if($posts):
+            echo "<br><h1>Artigos</h1>";
+
+            foreach($posts as $post):
+                echo "<p>#$post->id Título: $post->title</p>";
+                echo "<p>Subtítulo: $post->subtitle</p>";
+                echo "<p>Descrição: $post->description</p><hr>";
+            endforeach;
+        endif;
     }
 
     /**
