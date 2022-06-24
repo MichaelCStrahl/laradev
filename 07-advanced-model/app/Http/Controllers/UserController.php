@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Address;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -60,6 +61,82 @@ class UserController extends Controller
             echo "<p>Complemento: $userAddress->complement  CEP: $userAddress->zipcode</p>";
             echo "<p>Cidade/Estado: $userAddress->city/$userAddress->state</p>";
         endif;
+
+        /**
+         * 1°
+         */
+        // $address = new Address([
+        //     'address' => 'Rua teste',
+        //     'number' => '0',
+        //     'complement' => 'Apto 123',
+        //     'zipcode' => '88000-000',
+        //     'city' => 'Floripa',
+        //     'state' => 'SC'
+        // ]);
+        //
+        // $user->addressDelivery()->save($address);
+
+
+        /**
+         * 2°
+         */
+        // $address = new Address();
+        // $address->address = 'Tua teste 2';
+        // $address->number = '1';
+        // $address->complement = 'casa';
+        // $address->zipcode = '99000-000';
+        // $address->city = 'Teste 3';
+        // $address->state = 'RS';
+
+        // $user->addressDelivery()->save($address);
+
+
+        /**
+         * 3°
+         */
+        // $addressOne = new Address([
+        //     'address' => 'Rua teste 3',
+        //     'number' => '2',
+        //     'complement' => 'Apto 31',
+        //     'zipcode' => '77123-000',
+        //     'city' => 'Floripa',
+        //     'state' => 'SC'
+        // ]);
+
+        // $addressTwo = new Address();
+        // $addressTwo->address = 'Tua teste 4';
+        // $addressTwo->number = '3';
+        // $addressTwo->complement = 'casa 2';
+        // $addressTwo->zipcode = '99000-123';
+        // $addressTwo->city = 'Teste 4';
+        // $addressTwo->state = 'MA';
+
+        // $user->addressDelivery()->saveMany([$addressOne, $addressTwo]);
+
+
+        /**
+         * 4°
+         * não muito recomendado por conta de que não passa pelo modelo
+         * aqui também pode se utilizar o createMany()
+         */
+
+        // $user->addressDelivery()->create([
+        //     'address' => 'Rua teste 5',
+        //     'number' => '5',
+        //     'complement' => 'casa 2',
+        //     'zipcode' => '77123-123',
+        //     'city' => 'Bergamota',
+        //     'state' => 'RS'
+        // ]);
+
+        /**
+         * 5° - Muito cuidado com a carga de consultas no banco pois
+         * essa consulta trás os relacionamentos
+         * EVITAR USAR EM LOOPS
+         */
+        // $users = User::with('addressDelivery')->get();
+
+        // dd($users);
     }
 
     /**
