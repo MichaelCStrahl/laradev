@@ -87,23 +87,36 @@ class UserController extends Controller
         // }
 
 
-        $users = DB::table('users')
-                ->select('users.id', 'users.name', 'users.status', 'addresses.address')
-                // ->leftjoin('addresses', 'users.id', '=', 'addresses.user')
-                ->join('addresses', function($join){
-                    $join->on('users.id', '=', 'addresses.user')->where('addresses.status', '=', '1');
-                })
-                ->orderBy('users.id', 'ASC')
-                ->get();
+        // $users = DB::table('users')
+        //         ->select('users.id', 'users.name', 'users.status', 'addresses.address')
+        //         // ->leftjoin('addresses', 'users.id', '=', 'addresses.user')
+        //         ->join('addresses', function($join){
+        //             $join->on('users.id', '=', 'addresses.user')->where('addresses.status', '=', '1');
+        //         })
+        //         ->orderBy('users.id', 'ASC')
+        //         ->get();
 
-        echo "Total de registros: {$users->count()}<br>";
+        // echo "Total de registros: {$users->count()}<br>";
 
-        foreach ($users as $user) {
-            echo "#$user->id
-            Nome: $user->name
-            $user->status ::
-            $user->address <br>";
-        }
+        // foreach ($users as $user) {
+        //     echo "#$user->id
+        //     Nome: $user->name
+        //     $user->status ::
+        //     $user->address <br>";
+        // }
+
+        // DB::table('users')->insert([
+        //     'name' => 'Michael',
+        //     'email' => 'teste@teste.com',
+        //     'password' => bcrypt('1234'),
+        //     'status' => 1
+        // ]);
+
+        // DB::table('users')->where('id', '=', '1001')->update([
+        //     'name' => 'Michael Strahl'
+        // ]);
+
+        // DB::table('users')->where('id', '=', '1001')->delete();
 
     }
 }
