@@ -178,6 +178,28 @@ class UserController extends Controller
                 echo "<p>Categoria: #$comment->id $comment->content</p>";
             endforeach;
         endif;
+
+        $students = User::students()->get();
+
+        if($students):
+            echo "<br><h1>Alunos</h1>";
+
+            foreach($students as $student):
+                echo "<p>Nome do usuário: $student->name </p>";
+                echo "<p>E-mail: $student->email</p><hr>";
+            endforeach;
+        endif;
+
+        $admins = User::admins()->get();
+
+        if($admins):
+            echo "<br><h1>Admins</h1>";
+
+            foreach($admins as $admin):
+                echo "<p>Nome do usuário: $admin->name </p>";
+                echo "<p>E-mail: $admin->email</p><hr>";
+            endforeach;
+        endif;
     }
 
     /**
