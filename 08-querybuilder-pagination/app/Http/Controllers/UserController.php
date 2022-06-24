@@ -54,17 +54,36 @@ class UserController extends Controller
         //     $user->status_description <br>";
         // }
 
-        DB::table('users')->where('id', '<', '500')->chunkById(50, function($users){
-            foreach ($users as $user) {
-                echo "#$user->id
-                Nome: $user->name
-                $user->status <br>";
-            }
+        // DB::table('users')->where('id', '<', '500')->chunkById(50, function($users){
+        //     foreach ($users as $user) {
+        //         echo "#$user->id
+        //         Nome: $user->name
+        //         $user->status <br>";
+        //     }
 
-            echo "<br>";
-            echo "Encerrou um ciclo";
-            echo "<br><br>";
-            sleep(1);
-        });
+        //     echo "<br>";
+        //     echo "Encerrou um ciclo";
+        //     echo "<br><br>";
+        //     sleep(1);
+        // });
+
+        $users = DB::table('users')
+                // ->whereIn('users.status', [0, 1])
+                // ->whereNotIn('users.status', [0, 1])
+                // ->whereNull('')
+                ->whereNotNull('users.name')
+                // ->whereColumn('created_at', '=', 'updated_at')
+                // ->whereDate('created_at', '>', '2022-06-24 17:30:00')
+                ->whereDay('updated_at', '=', '01')
+                ->whereMonth('updated_at', '=', '06')
+                ->whereYear('updated_at', '=', '2022')
+                ->whereTime('updated_at', '>', '18:00:00')
+                ->get();
+
+        foreach ($users as $user) {
+            echo "#$user->id
+            Nome: $user->name
+            $user->status <br>";
+        }
     }
 }
