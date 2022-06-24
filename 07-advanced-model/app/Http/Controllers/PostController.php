@@ -78,6 +78,20 @@ class PostController extends Controller
         // $post->categories()->detach([3]);
         // $post->categories()->sync([5, 10]);
         // $post->categories()->syncWithoutDetaching([5, 6, 7]);
+
+        // $post->comments()->create([
+        //     'content' => 'Teste de comentário'
+        // ]);
+
+        $comments = $post->comments()->get();
+
+        if($comments):
+            echo "<br><h1>Comentários</h1>";
+
+            foreach($comments as $comment):
+                echo "<p>Categoria: #$comment->id $comment->content</p>";
+            endforeach;
+        endif;
     }
 
     /**
