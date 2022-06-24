@@ -200,6 +200,11 @@ class UserController extends Controller
                 echo "<p>E-mail: $admin->email</p><hr>";
             endforeach;
         endif;
+
+
+        $users = User::all();
+        var_dump($users->makeVisible('created_at')->toArray());
+        var_dump($users->makeHidden('created_at')->toJson(JSON_PRETTY_PRINT));
     }
 
     /**
