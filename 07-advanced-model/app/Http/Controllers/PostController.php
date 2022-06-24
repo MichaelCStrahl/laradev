@@ -66,9 +66,18 @@ class PostController extends Controller
             echo "<br><h1>Categorias</h1>";
 
             foreach($postCategories as $category):
-                echo "<p>Categoria: $category->name</p>";
+                echo "<p>Categoria: #$category->id $category->name</p>";
             endforeach;
         endif;
+
+        /**
+         * Atualizando relacionamentos
+         * parametro :: id categoria
+         */
+        // $post->categories()->attach([3]);
+        // $post->categories()->detach([3]);
+        // $post->categories()->sync([5, 10]);
+        // $post->categories()->syncWithoutDetaching([5, 6, 7]);
     }
 
     /**
