@@ -17,6 +17,24 @@ Route::get('/', function () {
     $user->birth = "1996-07-11";
     $user->email = "teste@teste.com";
 
+    $courses = [
+        [
+            'id' => 1,
+            'name' => 'Laravel Developer',
+            'tutor' => 'Gustavo Web'
+        ],
+        [
+            'id' => 2,
+            'name' => 'Bootstrap Builder',
+            'tutor' => 'Gustavo Web'
+        ],
+        [
+            'id' => 3,
+            'name' => 'FullStack PHP Developer',
+            'tutor' => 'Robson V. Leite'
+        ]
+    ];
+
     $alert = "<div style='background-color: red;'>Teste</div>";
 
     // return view('front.home')->with(['user' => $user]);
@@ -26,6 +44,7 @@ Route::get('/', function () {
 
     return view('front.home', [
         'user' => $user,
-        'alert' => $alert
+        'alert' => $alert,
+        'courses' => $courses
     ]);
 });
