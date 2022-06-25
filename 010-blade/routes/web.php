@@ -15,6 +15,7 @@ Route::get('/', function () {
     $user = new stdClass();
     $user->name = "Michael";
     $user->birth = "1996-07-11";
+    $user->email = "teste@teste.com";
 
     $alert = "<div style='background-color: red;'>Teste</div>";
 
