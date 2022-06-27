@@ -114,4 +114,12 @@ endforeach;
     @endphp --}}
 @endforeach
 
+@component('front.components.alert', ['type' => 'danger', 'datetime' => date('d/m/Y h:i')])
+    Mensagem de teste
+@endcomponent
+
+@alert(['type' => 'danger', 'datetime' => date('d/m/Y h:i')])
+        Mensagem gerada através do meu componente
+@endalert
+
 @endsection
