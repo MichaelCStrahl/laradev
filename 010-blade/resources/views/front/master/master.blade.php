@@ -7,6 +7,10 @@
     <title>LaraDev - @yield('title')</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    @hasSection ('css')
+        @yield('css')
+    @endif
 </head>
 <body>
 
@@ -17,5 +21,8 @@
     @include('front.include.footer')
 
     <script src="{{ asset('js/app.js') }}"></script>
+    @hasSection ('js')
+        @yield('js')
+    @endif
 </body>
 </html>
