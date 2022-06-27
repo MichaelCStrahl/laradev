@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class CourseController extends Controller
 {
@@ -33,30 +34,38 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    public function store(Course $request)
+
+    // public function store(Course $request)
+    public function store(Request $request)
     {
 
-        // $rules = [
-        //     'name' => 'required',
-        //     'tutor' => 'required|min:3|max:8',
-        //     'email' => 'required|email'
-        // ];
+        $rules = [
+            'name' => 'required',
+            'tutor' => 'required|min:3|max:8',
+            'email' => 'required|email'
+        ];
 
         /**
          * Tratamento de mensagens
          * OBS: instalando a tradução do laravel as mensagens são geradas automaticamente
          */
 
-        // $messages = [
-        //     'name.required' => 'Por favor, insira o nome do curso',
-        //     'tutor.required' => 'Por favor, insira o nome do tutor',
-        //     'email.required' => 'Por favor, insira o e-mail do curso',
-        //     'email.email' => 'Por favor, insira um endereço de e-mail que seja válido!'
-        // ];
+        $messages = [
+            'name.required' => 'Por favor, insira o nome do curso',
+            'tutor.required' => 'Por favor, insira o nome do tutor',
+            'email.required' => 'Por favor, insira o e-mail do curso',
+            'email.email' => 'Por favor, insira um endereço de e-mail que seja válido!'
+        ];
 
         // $request->validate($rules, $messages);
-        var_dump($request->all());
+        // var_dump($request->all());
+
+        $validate = Validator::make($request->all(), $rules, $messages);
+        var_dump($validate->fails());
+
+        if($validate->fails()):
+            return redirect()->route('course.create')->withInput()->withErrors($validate);
+        endif;
     }
 
     /**
