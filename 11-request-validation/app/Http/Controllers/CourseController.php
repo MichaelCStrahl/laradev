@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -32,29 +33,30 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    // public function store(Request $request)
+    public function store(Course $request)
     {
-        var_dump($request->all());
 
-        $rules = [
-            'name' => 'required',
-            'tutor' => 'required|min:3|max:8',
-            'email' => 'required|email'
-        ];
+        // $rules = [
+        //     'name' => 'required',
+        //     'tutor' => 'required|min:3|max:8',
+        //     'email' => 'required|email'
+        // ];
 
         /**
          * Tratamento de mensagens
          * OBS: instalando a tradução do laravel as mensagens são geradas automaticamente
          */
 
-        $messages = [
-            'name.required' => 'Por favor, insira o nome do curso',
-            'tutor.required' => 'Por favor, insira o nome do tutor',
-            'email.required' => 'Por favor, insira o e-mail do curso',
-            'email.email' => 'Por favor, insira um endereço de e-mail que seja válido!'
-        ];
+        // $messages = [
+        //     'name.required' => 'Por favor, insira o nome do curso',
+        //     'tutor.required' => 'Por favor, insira o nome do tutor',
+        //     'email.required' => 'Por favor, insira o e-mail do curso',
+        //     'email.email' => 'Por favor, insira um endereço de e-mail que seja válido!'
+        // ];
 
-        $request->validate($rules, $messages);
+        // $request->validate($rules, $messages);
+        var_dump($request->all());
     }
 
     /**
