@@ -1,3 +1,11 @@
+@extends('front.master.master')
+
+@section('title', 'Seja muito bem-vindo')
+
+@section('content')
+
+
+
 {{ $user->name }}
 
 <br>
@@ -105,3 +113,5 @@ endforeach;
         var_dump($loop);
     @endphp --}}
 @endforeach
+
+@endsection
