@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Support\Seo;
+use App\Post;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
     public function home()
     {
+        $posts = Post::orderBy('created_at', 'DESC')->limit(3)->get();
+
         $head = $this->seo->render(
             env('APP_NAME') . ' - Upinside Treinamentos',
             'Melhor frameword da web',
@@ -17,7 +19,8 @@ class WebController extends Controller
         );
 
         return view('front.home', [
-            'head' => $head
+            'head' => $head,
+            'posts' => $posts
         ]);
     }
 
