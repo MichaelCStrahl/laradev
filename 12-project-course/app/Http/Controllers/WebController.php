@@ -40,6 +40,7 @@ class WebController extends Controller
 
     public function blog()
     {
+        $posts = Post::orderBy('created_at', 'DESC')->get();
         $head = $this->seo->render(
             env('APP_NAME') . ' - Nosso blog',
             'Veja os melhores artigos de Laravel aqui',
@@ -48,22 +49,26 @@ class WebController extends Controller
         );
 
         return view('front.blog', [
-            'head' => $head
+            'head' => $head,
+            'posts' => $posts
         ]);
 
     }
 
-    public function article()
+    public function article($uri)
     {
+        $post = Post::where('uri', $uri)->first();
+
         $head = $this->seo->render(
-            env('APP_NAME') . ' - Artigos do site',
-            'Melhores artigos de Laravel',
-            route('article'),
-            asset('images/img_bg_1.jpg')
+            env('APP_NAME') . ' - ' . $post->title,
+            $post->subtitle,
+            route('article', $post->uri),
+            \Illuminate\Support\Facades\Storage::url(\App\Support\Cropper::thumb($post->cover, 1200, 628))
         );
 
         return view('front.article', [
-            'head' => $head
+            'head' => $head,
+            'post' => $post
         ]);
     }
 
