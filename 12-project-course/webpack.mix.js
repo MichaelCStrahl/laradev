@@ -46,4 +46,4 @@ mix
     .copyDirectory('resources/views/front/assets/images', 'public/front/assets/images')
     .options({
         processCssUrls: false
-    });
+    }).version();
