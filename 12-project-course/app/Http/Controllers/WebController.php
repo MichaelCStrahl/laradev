@@ -2,33 +2,79 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Seo;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
 {
     public function home()
     {
-        return view('front.home');
+        $head = $this->seo->render(
+            env('APP_NAME') . ' - Upinside Treinamentos',
+            'Melhor frameword da web',
+            url('/'),
+            asset('images/img_bg_1.jpg')
+        );
+
+        return view('front.home', [
+            'head' => $head
+        ]);
     }
 
     public function course()
     {
-        return view('front.course');
+        $head = $this->seo->render(
+            env('APP_NAME') . ' - Sobre o Curso',
+            'Melhor frameword da web',
+            route('course'),
+            asset('images/img_bg_1.jpg')
+        );
+
+        return view('front.course', [
+            'head' => $head
+        ]);
     }
 
     public function blog()
     {
-        return view('front.blog');
+        $head = $this->seo->render(
+            env('APP_NAME') . ' - Nosso blog',
+            'Veja os melhores artigos de Laravel aqui',
+            route('blog'),
+            asset('images/img_bg_1.jpg')
+        );
+
+        return view('front.blog', [
+            'head' => $head
+        ]);
 
     }
 
     public function article()
     {
-        return view('front.article');
+        $head = $this->seo->render(
+            env('APP_NAME') . ' - Artigos do site',
+            'Melhores artigos de Laravel',
+            route('article'),
+            asset('images/img_bg_1.jpg')
+        );
+
+        return view('front.article', [
+            'head' => $head
+        ]);
     }
 
     public function contact()
     {
-        return view('front.contact');
+        $head = $this->seo->render(
+            env('APP_NAME') . ' - Nossos contatos',
+            'Entre em contato conosco',
+            route('contact'),
+            asset('images/img_bg_1.jpg')
+        );
+
+        return view('front.contact', [
+            'head' => $head
+        ]);
     }
 }
